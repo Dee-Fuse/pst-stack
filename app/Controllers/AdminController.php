@@ -17,7 +17,14 @@ class AdminController extends Controller
             'isAdministration' => true
         ]);
     }
+	
+    public function throwException(Request $request, Response $response)
+    {
 
+		throw new \Exception("Just a Test");
+
+	}
+	
     public function getUserList(Request $request, Response $response)
     {
         $users = UserQuery::create()->find();

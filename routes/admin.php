@@ -5,6 +5,7 @@ use App\Middleware\AuthMiddleware;
 $app->group('/admin', function () use ($container) {
 
     $this->get('', 'AdminController:getDashboard')->setName('admin.dashboard');
+    $this->get('/exception', 'AdminController:throwException')->setName('admin.exception');
 
     $this->group('/users', function () {
 

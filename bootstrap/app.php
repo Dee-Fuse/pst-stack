@@ -2,16 +2,26 @@
 
 use Slim\Container;
 use Respect\Validation\Validator as v;
+use Zeuxisoo\Whoops\Provider\Slim\WhoopsGuard;
+use Zeuxisoo\Whoops\Provider\Slim\WhoopsMiddleware;
 
 #SLIM instantiate
 // The App itself
 $app = new \Slim\App([
     'settings' => [
+		'debug' => $conf['app.whoops']// On/Off whoops error
         'displayErrorDetails' => $conf['app.debug'],
-        'addContentLengthHeader' => false
+        'addContentLengthHeader' => false,
     ]
 ]);
 $container = $app->getContainer();
+
+// Replace the default phpErroHandler and erroHandler without enter/call to middleware
+$whoopsGuard = new WhoopsGuard();
+$whoopsGuard->setApp($app);
+$whoopsGuard->setRequest($container['request']);
+$whoopsGuard->setHandlers([]);
+$whoopsGuard->install();
 
 // Dependencies
 $container['auth'] = function () {
