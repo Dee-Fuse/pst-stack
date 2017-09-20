@@ -15,8 +15,20 @@ require 'encoding.php';
 #timezone
 require 'timezone.php';
 
-#Database Configuration
-require '../propel/generated-conf/config.php';
+if(!file_exists('../propel/.disabled')) {
 
-#SLIM instantiate
-require 'app.php';
+	require "install.php";
+	
+}
+else
+{
+	#Database Configuration
+	require '../propel/generated-conf/config.php';
+	
+	#SLIM instantiate
+	require 'app.php';
+	
+	//All routes
+	require dirname(__DIR__).DIRECTORY_SEPARATOR.'routes/routes.php';
+
+}

@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Propel Wizard</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Include Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+
+    <!-- Include SmartWizard CSS -->
+    <link href="{{ base_url() }}/assets/SmartWizard/css/smart_wizard.css" rel="stylesheet" type="text/css" />
+    
+    <!-- Optional SmartWizard theme -->
+    <link href="{{ base_url() }}/assets/SmartWizard/css/smart_wizard_theme_circles.css" rel="stylesheet" type="text/css" />
+    <link href="{{ base_url() }}/assets/SmartWizard/css/smart_wizard_theme_arrows.css" rel="stylesheet" type="text/css" />
+    <link href="{{ base_url() }}/assets/SmartWizard/css/smart_wizard_theme_dots.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+    <div class="container">
+        
+        <form class="form-inline">
+             <div class="form-group">
+              <label >Choose Theme:</label>
+              <select id="theme_selector" class="form-control">
+                    <option value="default">default</option>
+                    <option value="arrows">arrows</option>
+                    <option value="circles">circles</option>
+                    <option value="dots">dots</option>
+              </select>
+            </div>           
+            
+            <label>External Buttons:</label>
+            <div class="btn-group navbar-btn" role="group">
+                <button class="btn btn-default" id="prev-btn" type="button">Go Previous</button>
+                <button class="btn btn-default" id="next-btn" type="button">Go Next</button>
+                <button class="btn btn-danger" id="reset-btn" type="button">Reset Wizard</button>
+            </div>
+        </form>
+
+        <br />
+        
+        <!-- SmartWizard html -->
+        <div id="smartwizard">
+            <ul>
+                <li><a href="#step-1">Step 1<br /><small>DB Connection</small></a></li>
+                <li><a href="#step-2">Step 2<br /><small>Build settings</small></a></li>
+                <li><a href="#step-3">Step 3<br /><small>Create Admin</small></a></li>
+                <li><a href="#step-4">Step 4<br /><small>Disable Wizard</small></a></li>
+            </ul>
+            
+            <div>
+				<div id="step-1" class="">
+					<h2>Step 1 Content</h2>
+
+					<form role="form" id="form0">
+						<div class="form-group col-xs-10 col-sm-4 col-md-4 col-lg-4">
+							<label for="adapter">Adapter</label> <select class="form-control"
+								name="adapter" id="adapter">
+								<option value="mysql" {% if conf.adapter == "mysql" %}
+									selected="selected" {% endif %}>MySQL</option>
+							</select>
+						</div>
+						<div class="form-group col-xs-10 col-sm-4 col-md-4 col-lg-4">
+							<label for="dsn">DSN</label> <input type="text"
+								class="form-control" id="dsn" name="dsn" value="{{ conf.dsn }}"
+								placeholder="mysql:host=127.0.0.1;port=3306;dbname=pst-stack">
+						</div>
+						<div class="clearfix"></div>
+						<div class="form-group col-xs-10 col-sm-4 col-md-4 col-lg-4">
+							<label for="user">Username</label> <input type="text"
+								class="form-control" id="user" name="user"
+								value="{{ conf.user }}" placeholder="root">
+						</div>
+						<div class="form-group col-xs-10 col-sm-4 col-md-4 col-lg-4">
+							<label for="password">Password</label> <input type="password"
+								class="form-control" id="password" name="password"
+								value="{{ conf.password }}" placeholder="****">
+						</div>
+						<div class="clearfix"></div>
+
+						<div class="form-group col-xs-10 col-sm-4 col-md-4 col-lg-4">
+							<label for="charset">Charset</label> <select class="form-control"
+								name="charset" id="charset">
+								<option value="utf8" {% if conf.settings.charset == "utf8" %}
+									selected="selected" {% endif %}>UTF-8</option>
+							</select>
+						</div>
+						<div class="clearfix"></div>
+					</form>
+
+				</div>
+				<div id="step-2" class="">
+					<h2>Step 2 Content</h2>
+					<form role="form" id="form1">
+
+						<div class="form-group col-xs-10 col-sm-4 col-md-4 col-lg-4">
+							<div class="checkbox">
+								<label> <input type="checkbox" name="sqlBuild" id="sqlBuild" value="1"> Build SQL
+								</label>
+							</div>
+						</div>
+						<div class="form-group col-xs-10 col-sm-4 col-md-4 col-lg-4">
+							<div class="checkbox">
+								<label> <input type="checkbox" name="sqlInsert" id="sqlInsert" value="1"> Insert SQL into DB
+								</label>
+							</div>
+						</div>
+						<div class="clearfix"></div>
+						<div class="form-group col-xs-10 col-sm-4 col-md-4 col-lg-4">
+							<div class="checkbox">
+								<label> <input type="checkbox" name="sqlForce" id="sqlForce" value="1"> Force Overwrite
+								</label>
+							</div>
+						</div>
+						<div class="form-group col-xs-10 col-sm-4 col-md-4 col-lg-4">
+							<div class="checkbox">
+								<label> <input type="checkbox" name="modelBuild" id="modelBuild" value="1"> Model Build
+								</label>
+							</div>
+						</div>
+					</form>
+				</div>
+				<div id="step-3" class="">
+					<form role="form" id="form2">
+						<div class="form-group col-xs-10 col-sm-4 col-md-4 col-lg-4">
+							<label for="user">First name</label> 
+							<input type="text" class="form-control" id="firstName" name="firstName" placeholder="First name">
+						</div>
+						<div class="form-group col-xs-10 col-sm-4 col-md-4 col-lg-4">
+							<label for="password">Last name</label> 
+							<input type="text" class="form-control" id="lastName" name="lastName" placeholder="Last Name">
+						</div>
+						<div class="clearfix"></div>
+						<div class="form-group col-xs-10 col-sm-4 col-md-4 col-lg-4">
+							<label for="user">E-mail</label> 
+							<input type="text" class="form-control" id="email" name="email" placeholder="a@b.cd">
+						</div>
+						<div class="form-group col-xs-10 col-sm-4 col-md-4 col-lg-4">
+							<label for="password">Password</label> 
+							<input type="password" class="form-control" id="password" name="password" placeholder="****">
+						</div>
+						<div class="clearfix"></div>
+					</form>
+
+				</div>
+				<div id="step-4" class="">
+					<form role="form" id="form3">
+						<div class="form-group col-xs-10 col-sm-4 col-md-4 col-lg-4">
+							<div class="checkbox">
+								<label>
+									<input type="checkbox" name="disableWizard" id="disableWizard" value="1"> Disable Wizard
+								</label>
+							</div>
+						</div>
+					</form>
+				</div>
+            </div>
+        </div>
+        
+        
+    </div>
+    
+    <!-- Include jQuery -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+
+    <!-- Include SmartWizard JavaScript source -->
+    <script type="text/javascript" src="{{ base_url() }}/assets/SmartWizard/js/jquery.smartWizard.min.js"></script>
+
+    <script type="text/javascript">
+        $(document).ready(function(){
+			function postForm(formId)
+			{
+				var status = true;
+				$.ajax({
+					  type: 'POST',
+					  url: '{{ path_for('setForm') }}',
+					  data: $('#form'+formId).serialize()+"&step="+formId,
+					  async:false
+					  
+				
+				}).done(function( data ) {
+    				console.log(data);
+    				status = data.result;
+				});
+				return status;
+			}
+			
+            // Toolbar extra buttons
+            var btnFinish = $('<button id="btnFinish"></button>').text('Finish')
+                            .addClass('btn btn-info disabled')
+                            .on('click', function(){ postForm(3) });
+            
+            var btnCancel = $('<button id="btnCancel"></button>').text('Cancel')
+                            .addClass('btn btn-danger')
+                            .on('click', function(){ $('#smartwizard').smartWizard("reset"); });
+            
+            
+            // Step show event 
+            $("#smartwizard").on("showStep", function(e, anchorObject, stepNumber, stepDirection, stepPosition) {
+               //alert("You are on step "+stepNumber+" now");
+               if(stepPosition === 'first'){
+                   $("#prev-btn").addClass('disabled');
+               }else if(stepPosition === 'final'){
+                   $("#next-btn").addClass('disabled');
+                   $("#btnFinish").removeClass('disabled');
+               }else{
+            	   $("#btnFinish").addClass('disabled')
+                   $("#prev-btn").removeClass('disabled');
+                   $("#next-btn").removeClass('disabled');
+               }
+            });
+            
+
+            
+            // Smart Wizard
+            $('#smartwizard').smartWizard({ 
+                    selected: 0, 
+                    theme: 'default',
+                    transitionEffect:'fade',
+                    showStepURLhash: false,
+                    toolbarSettings: 
+					{
+						toolbarPosition: 'bottom',
+                        toolbarExtraButtons: [btnFinish, btnCancel]
+                    }
+            });
+			$("#smartwizard").on("leaveStep", function(e, anchorObject, stepNumber, stepDirection) {
+				console.log($('#form'+stepNumber).serialize(), stepDirection);
+				if(stepDirection == "forward")
+				{ 
+					return postForm(stepNumber)
+				}
+			});
+            
+            // External Button Events
+            $("#reset-btn").on("click", function() {
+                // Reset wizard
+                $('#smartwizard').smartWizard("reset");
+                return true;
+            });
+            
+            $("#prev-btn").on("click", function() {
+                // Navigate previous
+                $('#smartwizard').smartWizard("prev");
+                return true;
+            });
+            
+            $("#next-btn").on("click", function() {
+                // Navigate next
+                $('#smartwizard').smartWizard("next");
+                return true;
+            });
+            
+            $("#theme_selector").on("change", function() {
+                // Change theme
+                $('#smartwizard').smartWizard("theme", $(this).val());
+                return true;
+            });
+            
+            // Set selected theme on page refresh
+            $("#theme_selector").change();
+        });   
+    </script>  
+</body>
+</html>
