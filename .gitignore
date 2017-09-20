@@ -5,7 +5,8 @@ config/settings.php
 propel/generated-conf/
 propel/generated-migrations/
 propel/generated-sql/
-propel/propel.xml
+propel/propel.php
+propel/.disabled
 tmp/*
 !tmp/README.md
 vendor/
